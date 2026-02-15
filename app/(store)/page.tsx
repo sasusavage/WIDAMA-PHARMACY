@@ -21,7 +21,7 @@ export default function Home() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % 3);
+      setCurrentSlide((prev) => (prev + 1) % 2);
     }, 5000);
     return () => clearInterval(timer);
   }, []);
@@ -128,7 +128,6 @@ export default function Home() {
           {[
             '/hero-1.png',
             '/hero-2.png',
-            '/hero-3.png'
           ].map((img, index) => (
             <div
               key={index}
@@ -138,11 +137,11 @@ export default function Home() {
                 src={img}
                 alt={`Hero Banner ${index + 1}`}
                 fill
-                className="object-cover opacity-80"
+                className="object-cover"
                 priority={index === 0}
                 quality={90}
               />
-              <div className="absolute inset-0 bg-black/30"></div> {/* Dark overlay for text readability */}
+              <div className="absolute inset-0 bg-black/20"></div> {/* 20% black overlay */}
             </div>
           ))}
         </div>
