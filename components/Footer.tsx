@@ -6,6 +6,7 @@ import { useCMS } from '@/context/CMSContext';
 export default function Footer() {
   const { getSetting, getContentList } = useCMS();
   const siteName = getSetting('site_name') || 'WIDAMA Pharmacy';
+  const siteLogo = getSetting('site_logo') || '/logo.png';
   const siteEmail = getSetting('contact_email') || 'info@widamapharmacy.com';
   const sitePhone = getSetting('contact_phone') || '+233 XX XXX XXXX';
   const siteAddress = getSetting('contact_address') || 'WIDAMA Towers, Ashaiman Lebanon, Ghana';
@@ -103,7 +104,7 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-4">
             <Link href="/" className="flex items-center gap-3 mb-6 group">
-              <img src="/logo.png" alt={siteName} className="h-12 w-auto object-contain" />
+              <img src={siteLogo} alt={siteName} className="h-12 w-auto object-contain" />
               <div>
                 <span className="text-white font-bold text-xl block leading-tight">WIDAMA</span>
                 <span className="text-gold-300 text-[10px] uppercase tracking-[0.25em] font-medium">Pharmacy</span>

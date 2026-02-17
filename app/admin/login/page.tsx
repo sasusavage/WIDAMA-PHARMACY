@@ -5,9 +5,12 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { useRecaptcha } from '@/hooks/useRecaptcha';
+import { useCMS } from '@/context/CMSContext';
 
 export default function AdminLoginPage() {
   const router = useRouter();
+  const { getSetting } = useCMS();
+  const siteLogo = getSetting('site_logo') || '/logo.png';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -56,7 +59,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="inline-block">
-            <img src="/logo.png" alt="WIDAMA Pharmacy" className="h-12 w-auto mx-auto" />
+            <img src={siteLogo} alt="WIDAMA Pharmacy" className="h-12 w-auto mx-auto" />
           </Link>
           <h1 className="text-3xl font-bold text-gray-900 mt-6 mb-2">Admin Login</h1>
           <p className="text-gray-600">Sign in to access the admin dashboard</p>

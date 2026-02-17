@@ -1,8 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useCMS } from '@/context/CMSContext';
 
 export default function PWASplash() {
+  const { getSetting } = useCMS();
+  const siteLogo = getSetting('site_logo') || '/logo.png';
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
@@ -15,7 +18,7 @@ export default function PWASplash() {
   return (
     <div className="pwa-splash">
       <div className="pwa-splash-logo flex flex-col items-center">
-        <img src="/logo.png" alt="WIDAMA Pharmacy" className="w-24 h-24 object-contain mb-6" />
+        <img src={siteLogo} alt="WIDAMA Pharmacy" className="w-24 h-24 object-contain mb-6" />
         <h1 className="text-white text-3xl font-bold font-serif mb-2">WIDAMA</h1>
         <p className="text-gold-300 text-xs uppercase tracking-[0.3em] font-medium">Pharmacy</p>
       </div>
