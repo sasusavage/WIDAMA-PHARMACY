@@ -171,7 +171,9 @@ export default function HeroManager() {
         }
     };
 
-    if (loading) return <div className="p-8 text-center text-gray-500">Loading slides...</div>;
+    if (loading) {
+        return <div className="p-8 text-center text-gray-500">Loading slides...</div>;
+    }
 
     return (
         <div className="max-w-6xl mx-auto">
@@ -465,5 +467,6 @@ export default function HeroManager() {
                     </div>
                 </div>
             )}
-            );
+        </div>
+    );
 }
