@@ -277,23 +277,23 @@ export default function HeroManager() {
 
             {/* Modal */}
             {isModalOpen && (
-                <div className="fixed inset-0 z-50 overflow-y-auto">
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsModalOpen(false)} />
-                    <div className="flex min-h-full items-center justify-center p-4">
-                        <div className="relative bg-white rounded-2xl w-full max-w-2xl shadow-2xl my-8 z-10">
-                            <div className="p-6 border-b border-gray-100 flex justify-between items-center rounded-t-2xl">
-                                <h2 className="text-xl font-bold text-gray-900">
-                                    {editingSlide ? 'Edit Slide' : 'New Slide'}
-                                </h2>
-                                <button
-                                    onClick={() => setIsModalOpen(false)}
-                                    className="text-gray-400 hover:text-gray-600"
-                                >
-                                    <i className="ri-close-line text-2xl"></i>
-                                </button>
-                            </div>
+                    <div className="relative bg-white rounded-2xl w-full max-w-2xl shadow-2xl max-h-[90vh] flex flex-col z-10">
+                        <div className="p-6 border-b border-gray-100 flex justify-between items-center shrink-0">
+                            <h2 className="text-xl font-bold text-gray-900">
+                                {editingSlide ? 'Edit Slide' : 'New Slide'}
+                            </h2>
+                            <button
+                                onClick={() => setIsModalOpen(false)}
+                                className="text-gray-400 hover:text-gray-600"
+                            >
+                                <i className="ri-close-line text-2xl"></i>
+                            </button>
+                        </div>
 
-                            <form onSubmit={handleSubmit} className="p-6 space-y-6">
+                        <div className="overflow-y-auto p-6">
+                            <form onSubmit={handleSubmit} className="space-y-6">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="col-span-1">
                                         <label className="block text-sm font-medium text-gray-700 mb-1">Tagline</label>
