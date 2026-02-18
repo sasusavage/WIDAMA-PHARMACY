@@ -10,6 +10,16 @@ const DEFAULT_KEYWORDS = [
   'pharmacy training Ghana', 'pharmaceutical manufacturing',
 ];
 
+export function StructuredData({ data }: { data: any }) {
+  if (!data) return null;
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}
+
 export function generateMetadata({
   title = '',
   description = SITE_DESCRIPTION,
@@ -77,6 +87,8 @@ export function generateProductSchema(product: {
   inStock?: boolean;
   rating?: number;
   reviewCount?: number;
+  category?: string;
+  availability?: string; // override specific availability string
 }) {
   return {
     '@context': 'https://schema.org',
@@ -86,6 +98,7 @@ export function generateProductSchema(product: {
     image: product.image ? (product.image.startsWith('http') ? product.image : `${SITE_URL}${product.image}`) : `${SITE_URL}/og-image.jpg`,
     sku: product.sku || '',
     url: product.slug ? `${SITE_URL}/product/${product.slug}` : '',
+    category: product.category,
     brand: {
       '@type': 'Brand',
       name: SITE_NAME,
@@ -94,9 +107,9 @@ export function generateProductSchema(product: {
       '@type': 'Offer',
       priceCurrency: product.currency || 'GHS',
       price: product.price,
-      availability: product.inStock !== false
-        ? 'https://schema.org/InStock'
-        : 'https://schema.org/OutOfStock',
+      availability: product.availability
+        ? `https://schema.org/${product.availability === 'in_stock' ? 'InStock' : 'OutOfStock'}`
+        : (product.inStock !== false ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock'),
       seller: {
         '@type': 'Organization',
         name: SITE_NAME,
