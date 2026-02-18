@@ -11,6 +11,7 @@ interface SettingRow {
 
 const SETTING_CATEGORIES = [
     { id: 'announcement', label: 'Announcement', icon: 'ri-megaphone-line', description: 'Top announcement bar' },
+    { id: 'newsletter', label: 'Newsletter', icon: 'ri-mail-send-line', description: 'Subscription section' },
     { id: 'general', label: 'General', icon: 'ri-settings-3-line', description: 'Site name, tagline, and logo' },
     { id: 'contact', label: 'Contact Info', icon: 'ri-contacts-line', description: 'Email, phone, and address' },
     { id: 'social', label: 'Social Media', icon: 'ri-share-line', description: 'Social media links' },
@@ -108,6 +109,7 @@ export default function SiteSettingsPage() {
                 // Determine category
                 let category = 'general';
                 if (key.startsWith('announcement_')) category = 'announcement';
+                else if (key.startsWith('newsletter_')) category = 'newsletter';
                 else if (key.startsWith('social_')) category = 'social';
                 else if (key.startsWith('contact_')) category = 'contact';
                 else if (key.startsWith('footer_') || key === 'payment_methods') category = 'footer';
@@ -257,6 +259,44 @@ export default function SiteSettingsPage() {
                                         <h3 className="font-bold text-sm text-gray-600 mb-4">Preview</h3>
                                         <div className="bg-brand-700 text-white px-4 py-2.5 text-center text-xs sm:text-sm font-medium rounded-lg">
                                             {getVal('announcement_text') || 'Your announcement will appear here'}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Newsletter */}
+                            {activeTab === 'newsletter' && (
+                                <div className="space-y-6">
+                                    <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+                                        <i className="ri-mail-send-line text-blue-600"></i> Newsletter Section
+                                    </h2>
+                                    <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-start gap-3">
+                                        <i className="ri-information-line text-blue-600 mt-0.5"></i>
+                                        <p className="text-sm text-blue-700">
+                                            Configure the newsletter subscription section that appears above the footer.
+                                        </p>
+                                    </div>
+
+                                    <div className="grid gap-6">
+                                        <div>
+                                            <label className="block text-sm font-semibold text-gray-700 mb-2">Section Title</label>
+                                            <input
+                                                type="text"
+                                                value={getVal('newsletter_title')}
+                                                onChange={e => setVal('newsletter_title', e.target.value)}
+                                                placeholder="Stay Healthy, Stay Informed"
+                                                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-semibold text-gray-700 mb-2">Section Subtitle</label>
+                                            <textarea
+                                                value={getVal('newsletter_subtitle')}
+                                                onChange={e => setVal('newsletter_subtitle', e.target.value)}
+                                                placeholder="Subscribe to our newsletter for health tips..."
+                                                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                                                rows={3}
+                                            />
                                         </div>
                                     </div>
                                 </div>

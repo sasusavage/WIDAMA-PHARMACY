@@ -1,10 +1,15 @@
 'use client';
 
 import { useState } from 'react';
+import { useCMS } from '@/context/CMSContext';
 
 export default function NewsletterSection() {
+  const { getSetting } = useCMS();
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+
+  const newsletterTitle = getSetting('newsletter_title') || 'Stay Healthy, Stay Informed';
+  const newsletterSubtitle = getSetting('newsletter_subtitle') || 'Subscribe to our newsletter for health tips, new product alerts, and exclusive offers from WIDAMA Pharmacy.';
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,10 +34,10 @@ export default function NewsletterSection() {
           <i className="ri-mail-send-line text-2xl text-brand-600"></i>
         </div>
         <h2 className="font-serif text-3xl sm:text-4xl text-gray-900 mb-4">
-          Stay Healthy, Stay Informed
+          {newsletterTitle}
         </h2>
         <p className="text-gray-500 text-lg mb-8 max-w-xl mx-auto">
-          Subscribe to our newsletter for health tips, new product alerts, and exclusive offers from WIDAMA Pharmacy.
+          {newsletterSubtitle}
         </p>
 
         {submitted ? (
@@ -51,7 +56,7 @@ export default function NewsletterSection() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email address"
               required
-              className="flex-1 px-5 py-4 border-2 border-brand-100 rounded-xl focus:ring-2 focus:ring-brand-200 focus:border-brand-400 text-base bg-white transition-all"
+              className="flex-1 px-5 py-4 border-2 border-brand-100 rounded-xl focus:ring-2 focus:ring-blue-200 focus:border-brand-400 text-base bg-white transition-all"
             />
             <button
               type="submit"
