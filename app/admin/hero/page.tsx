@@ -341,7 +341,7 @@ export default function HeroManager() {
                                     {/* Image Upload */}
                                     <div className="col-span-1">
                                         <label className="block text-sm font-medium text-gray-700 mb-1">Image (Background)</label>
-                                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:bg-gray-50 transition-colors">
+                                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:bg-gray-50 transition-colors relative group">
                                             <input
                                                 type="file"
                                                 ref={fileInputRef}
@@ -372,13 +372,29 @@ export default function HeroManager() {
                                                     </div>
                                                 )}
                                             </div>
+
+                                            {(imageFile || formData.image_url) && (
+                                                <button
+                                                    type="button"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setImageFile(null);
+                                                        setFormData({ ...formData, image_url: '' });
+                                                        if (fileInputRef.current) fileInputRef.current.value = '';
+                                                    }}
+                                                    className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 shadow-md z-10"
+                                                    title="Remove Image"
+                                                >
+                                                    <i className="ri-close-line"></i>
+                                                </button>
+                                            )}
                                         </div>
                                     </div>
 
                                     {/* Video Upload */}
                                     <div className="col-span-1">
                                         <label className="block text-sm font-medium text-gray-700 mb-1">Video (Optional)</label>
-                                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:bg-gray-50 transition-colors">
+                                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:bg-gray-50 transition-colors relative group">
                                             <input
                                                 type="file"
                                                 ref={videoInputRef}
@@ -409,6 +425,22 @@ export default function HeroManager() {
                                                     </div>
                                                 )}
                                             </div>
+
+                                            {(videoFile || formData.video_url) && (
+                                                <button
+                                                    type="button"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setVideoFile(null);
+                                                        setFormData({ ...formData, video_url: null });
+                                                        if (videoInputRef.current) videoInputRef.current.value = '';
+                                                    }}
+                                                    className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 shadow-md z-10"
+                                                    title="Remove Video"
+                                                >
+                                                    <i className="ri-close-line"></i>
+                                                </button>
+                                            )}
                                         </div>
                                     </div>
 
