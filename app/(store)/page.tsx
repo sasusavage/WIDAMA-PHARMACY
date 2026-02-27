@@ -25,9 +25,9 @@ const DEFAULT_SLIDES = [
   },
   {
     id: 'default-2',
-    tag: 'Wholesale & Retail',
+    tag: 'Wholesale Pharmacy & Retail',
     title: 'Pharmaceutical Excellence in Ghana',
-    subtitle: 'From wholesale distribution to retail pharmacy — WIDAMA Towers, Ashaiman Lebanon. Serving healthcare professionals and families.',
+    subtitle: 'From wholesale pharmacy to retail drug shop — WIDAMA Towers, Ashaiman Lebanon. Serving healthcare professionals and families.',
     cta_text: 'Browse Products',
     cta_link: '/shop',
     image_url: null,
@@ -165,34 +165,19 @@ export default function Home() {
     description: s.content || '',
     color: s.metadata?.color || 'from-brand-500 to-brand-700',
     link: s.metadata?.link || '/about'
-  })) : [
-    { icon: 'ri-medicine-bottle-line', title: 'Retail Pharmacy', description: 'Walk-in and online pharmaceutical dispensing with expert pharmacist consultation.', color: 'from-brand-500 to-brand-700', link: '/shop' },
-    { icon: 'ri-global-line', title: 'Wholesale Distribution', description: 'Bulk pharmaceutical supply to hospitals, clinics, and pharmacies across Ghana.', color: 'from-brand-400 to-brand-600', link: '/contact' },
-    { icon: 'ri-microscope-line', title: 'Manufacturing', description: 'Production of quality pharmaceutical products meeting international standards.', color: 'from-gold-400 to-gold-600', link: '/about' },
-    { icon: 'ri-book-open-line', title: 'Training Institute', description: 'WIDAMA Training Institute — educating future pharmacy professionals.', color: 'from-pharmacy-blue to-brand-600', link: '/about' },
-  ];
+  })) : [];
 
   const trustBadges = cmsTrustBadges.length > 0 ? cmsTrustBadges.map(b => ({
     icon: b.metadata?.icon || 'ri-shield-check-line',
     label: b.title || '',
     sublabel: b.subtitle || '',
-  })) : [
-    { icon: 'ri-shield-check-line', label: 'FDA Approved', sublabel: 'Licensed Pharmacy' },
-    { icon: 'ri-verified-badge-line', label: 'Genuine Products', sublabel: '100% Authentic' },
-    { icon: 'ri-truck-line', label: 'Fast Delivery', sublabel: 'Nationwide Shipping' },
-    { icon: 'ri-customer-service-2-line', label: 'Expert Support', sublabel: 'Pharmacist On Call' },
-  ];
+  })) : [];
 
   const stats = cmsStats.length > 0 ? cmsStats.map(s => ({
     value: s.title || '',
     label: s.subtitle || '',
     suffix: s.metadata?.suffix || '',
-  })) : [
-    { value: '20+', label: 'Years of Service', suffix: '' },
-    { value: '10K', label: 'Products Available', suffix: '+' },
-    { value: '50K', label: 'Happy Customers', suffix: '+' },
-    { value: '24/7', label: 'Customer Support', suffix: '' },
-  ];
+  })) : [];
 
   return (
     <main className="flex-col items-center justify-between min-h-screen">
@@ -309,7 +294,7 @@ export default function Home() {
                         <div className="absolute inset-4 rounded-full border border-brand-300/10" />
 
                         {/* Center emblem */}
-                        <div className="absolute inset-8 bg-gradient-to-br from-white/10 to-white/5 rounded-full backdrop-blur-xl flex flex-col items-center justify-center border border-white/10">
+                        <div className="absolute inset-8 bg-gradient-to-br from-white/10 to-white/5 rounded-full backdrop-blur-xl flex flex-col items-center justify-center">
                           <div className="text-7xl text-gold-400 mb-3 animate-heartbeat">✚</div>
                           <div className="text-white font-serif text-2xl font-bold">WIDAMA</div>
                           <div className="text-gold-300 text-xs uppercase tracking-[0.3em] mt-1">Est. 2004</div>
@@ -400,13 +385,13 @@ export default function Home() {
             <div className="max-w-2xl">
               <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-brand-100 text-brand-600 text-xs font-bold tracking-wider uppercase mb-4 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse"></span>
-                {servicesHeader?.metadata?.tag || 'Our Expertise'}
+                {servicesHeader?.metadata?.tag || ''}
               </p>
               <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-gray-900 leading-[1.1] mb-6">
                 {servicesHeader?.title || <>Comprehensive <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-800">Healthcare</span> Solutions</>}
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed">
-                {servicesHeader?.subtitle || 'From retail pharmacy to wholesale distribution, manufacturing, and professional training — WIDAMA Pharmacy is your complete, trusted healthcare partner.'}
+                {servicesHeader?.subtitle || ''}
               </p>
             </div>
 
@@ -479,9 +464,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <AnimatedSection className="flex items-end justify-between mb-12">
             <div>
-              <p className="text-brand-500 font-semibold text-sm uppercase tracking-wider mb-2">{categoriesHeader?.metadata?.tag || 'Browse Our Range'}</p>
+              <p className="text-brand-500 font-semibold text-sm uppercase tracking-wider mb-2">{categoriesHeader?.metadata?.tag || ''}</p>
               <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-gray-900 mb-3">{categoriesHeader?.title || 'Shop by Category'}</h2>
-              <p className="text-gray-500 text-lg max-w-md">{categoriesHeader?.subtitle || 'Find exactly what you need for your health and wellness'}</p>
+              <p className="text-gray-500 text-lg max-w-md">{categoriesHeader?.subtitle || ''}</p>
             </div>
             <Link href="/categories" className="hidden md:flex items-center gap-2 text-brand-600 font-semibold hover:text-brand-700 transition-colors bg-brand-50 px-5 py-2.5 rounded-full hover:bg-brand-100">
               View All <i className="ri-arrow-right-line"></i>
@@ -530,9 +515,9 @@ export default function Home() {
       <section className="py-20 md:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="text-center mb-16">
-            <p className="text-brand-500 font-semibold text-sm uppercase tracking-wider mb-2">{productsHeader?.metadata?.tag || 'Curated For You'}</p>
+            <p className="text-brand-500 font-semibold text-sm uppercase tracking-wider mb-2">{productsHeader?.metadata?.tag || ''}</p>
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-gray-900 mb-4">{productsHeader?.title || 'Featured Products'}</h2>
-            <p className="text-gray-500 text-lg max-w-2xl mx-auto">{productsHeader?.subtitle || 'Hand-picked pharmaceuticals and health essentials'}</p>
+            <p className="text-gray-500 text-lg max-w-2xl mx-auto">{productsHeader?.subtitle || ''}</p>
           </AnimatedSection>
 
           {loading ? (
@@ -612,7 +597,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-14">
             <h2 className="font-serif text-3xl sm:text-4xl text-white mb-4">{statsHeader?.title || 'Trusted by Thousands Across Ghana'}</h2>
-            <p className="text-brand-200 text-lg max-w-2xl mx-auto">{statsHeader?.subtitle || 'Founded in 2004 by Mr. Wisdom Amezah, WIDAMA Pharmacy has grown into a leading healthcare provider.'}</p>
+            <p className="text-brand-200 text-lg max-w-2xl mx-auto">{statsHeader?.subtitle || ''}</p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -646,9 +631,9 @@ export default function Home() {
                     <div className="w-16 h-16 bg-gold-400/20 rounded-2xl flex items-center justify-center mb-6">
                       <i className="ri-heart-pulse-line text-3xl text-gold-300"></i>
                     </div>
-                    <h3 className="text-3xl font-serif font-bold mb-4">{aboutCard?.title || 'Your Health Partner Since 2004'}</h3>
+                    <h3 className="text-3xl font-serif font-bold mb-4">{aboutCard?.title || ''}</h3>
                     <p className="text-white/70 text-lg leading-relaxed mb-6">
-                      {aboutCard?.content || 'WIDAMA Pharmacy was founded by Mr. Wisdom Amezah with a vision to make quality healthcare accessible to every Ghanaian. Today, we are one of the most trusted names in pharmaceutical services.'}
+                      {aboutCard?.content || ''}
                     </p>
                     <div className="flex flex-wrap gap-3">
                       <span className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium border border-white/10">✚ Licensed Pharmacy</span>

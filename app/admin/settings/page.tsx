@@ -111,7 +111,7 @@ export default function SiteSettingsPage() {
                 if (key.startsWith('announcement_')) category = 'announcement';
                 else if (key.startsWith('newsletter_')) category = 'newsletter';
                 else if (key.startsWith('social_')) category = 'social';
-                else if (key.startsWith('contact_')) category = 'contact';
+                else if (key.startsWith('contact_') || key === 'contact_gps' || key === 'contact_branches') category = 'contact';
                 else if (key.startsWith('footer_') || key === 'payment_methods') category = 'footer';
                 else if (['primary_color', 'secondary_color', 'accent_color'].includes(key)) category = 'branding';
                 else if (['currency', 'currency_symbol'].includes(key)) category = 'currency';
@@ -366,6 +366,21 @@ export default function SiteSettingsPage() {
                                             <div className="relative">
                                                 <i className="ri-map-pin-line absolute left-4 top-4 text-gray-400"></i>
                                                 <textarea value={getVal('contact_address')} onChange={e => setVal('contact_address', e.target.value)} rows={3} className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none resize-none" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-semibold text-gray-700 mb-2">GPS Address</label>
+                                            <div className="relative">
+                                                <i className="ri-compass-line absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                                <input type="text" value={getVal('contact_gps')} onChange={e => setVal('contact_gps', e.target.value)} placeholder="e.g. AK-123-4567" className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-semibold text-gray-700 mb-2">Our Branches</label>
+                                            <p className="text-xs text-gray-500 mb-2">List your branches separated by commas or new lines</p>
+                                            <div className="relative">
+                                                <i className="ri-store-2-line absolute left-4 top-4 text-gray-400"></i>
+                                                <textarea value={getVal('contact_branches')} onChange={e => setVal('contact_branches', e.target.value)} rows={4} placeholder="Ashaiman Lebanon (Main)&#10;Tema Community 1&#10;Accra Central" className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none resize-none" />
                                             </div>
                                         </div>
                                     </div>

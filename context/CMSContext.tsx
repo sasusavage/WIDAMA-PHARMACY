@@ -10,6 +10,8 @@ interface SiteSettings {
     contact_email: string;
     contact_phone: string;
     contact_address: string;
+    contact_gps: string;
+    contact_branches: string;
     social_facebook: string;
     social_instagram: string;
     social_twitter: string;
@@ -82,6 +84,8 @@ const defaultSettings: SiteSettings = {
     contact_email: 'info@widamapharmacy.com',
     contact_phone: '+233 XX XXX XXXX',
     contact_address: 'WIDAMA Towers, Ashaiman Lebanon, Ghana',
+    contact_gps: '',
+    contact_branches: '[]',
     social_facebook: '',
     social_instagram: '',
     social_twitter: '',
@@ -95,7 +99,7 @@ const defaultSettings: SiteSettings = {
     currency: 'GHS',
     currency_symbol: 'GH₵',
     footer_copyright: 'All rights reserved. Licensed Pharmacy — WIDAMA Towers, Ashaiman Lebanon, Ghana.',
-    footer_description: 'Your trusted healthcare partner since 2004. Quality medicines, wholesale distribution, manufacturing, and professional training — all under one roof.',
+    footer_description: 'Your trusted healthcare partner since 2004. Quality medicines, wholesale pharmacy, manufacturing, and professional training — all under one roof.',
     footer_cta_title: 'Need Pharmaceutical Advice?',
     footer_cta_subtitle: 'Our licensed pharmacists are here to help.',
     payment_methods: '["Mobile Money", "Card"]',

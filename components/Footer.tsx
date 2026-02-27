@@ -10,7 +10,9 @@ export default function Footer() {
   const siteEmail = getSetting('contact_email') || 'info@widamapharmacy.com';
   const sitePhone = getSetting('contact_phone') || '+233 XX XXX XXXX';
   const siteAddress = getSetting('contact_address') || 'WIDAMA Towers, Ashaiman Lebanon, Ghana';
-  const footerDescription = getSetting('footer_description') || 'Your trusted healthcare partner since 2004. Quality medicines, wholesale distribution, manufacturing, and professional training — all under one roof.';
+  const siteGps = getSetting('contact_gps');
+  const siteBranches = getSetting('contact_branches');
+  const footerDescription = getSetting('footer_description') || 'Your trusted healthcare partner since 2004. Quality medicines, wholesale pharmacy, manufacturing, and professional training — all under one roof.';
   const footerCopyright = getSetting('footer_copyright') || `All rights reserved. Licensed Pharmacy — WIDAMA Towers, Ashaiman Lebanon, Ghana.`;
   const footerCtaTitle = getSetting('footer_cta_title') || 'Need Pharmaceutical Advice?';
   const footerCtaSubtitle = getSetting('footer_cta_subtitle') || 'Our licensed pharmacists are here to help.';
@@ -120,8 +122,26 @@ export default function Footer() {
               </a>
               <div className="flex items-start gap-3">
                 <i className="ri-map-pin-fill text-gold-400 mt-1"></i>
-                <span className="max-w-[200px]">{siteAddress}</span>
+                <div className="flex flex-col gap-1">
+                  <span className="max-w-[200px]">{siteAddress}</span>
+                  {siteGps && (
+                    <span className="text-xs text-gold-300 font-bold tracking-wider">GPS: {siteGps}</span>
+                  )}
+                </div>
               </div>
+              {siteBranches && siteBranches.length > 5 && (
+                <div className="flex items-start gap-3 mt-1">
+                  <i className="ri-store-2-fill text-gold-400 mt-1"></i>
+                  <div className="flex flex-col gap-0.5">
+                    <p className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Our Branches</p>
+                    <p className="text-xs text-white/60 leading-tight">
+                      {siteBranches.split(/[\n,]+/).map((b, i) => (
+                        <span key={i} className="block">{b.trim()}</span>
+                      ))}
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Social Links */}

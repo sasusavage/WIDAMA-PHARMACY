@@ -9,7 +9,7 @@ import { useRecaptcha } from '@/hooks/useRecaptcha';
 
 export default function ContactPage() {
   usePageTitle('Contact Us');
-  const { getSetting } = useCMS();
+  const { getSetting, getContentList } = useCMS();
   const [pageContent, setPageContent] = useState<any>(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -88,13 +88,15 @@ export default function ContactPage() {
   };
 
   // Get contact details from CMS settings
-  const contactEmail = getSetting('contact_email') || 'info@widamapharmacy.com';
-  const contactPhone = getSetting('contact_phone') || '+233209597443';
-  const contactAddress = getSetting('contact_address') || 'Accra, Ghana';
+  const contactEmail = getSetting('contact_email') || '';
+  const contactPhone = getSetting('contact_phone') || '';
+  const contactAddress = getSetting('contact_address') || '';
+  const siteGps = getSetting('contact_gps');
+  const siteBranches = getSetting('contact_branches');
 
-  const heroTitle = pageContent?.title || 'Get In Touch';
-  const heroSubtitle = pageContent?.subtitle || 'Have a question or need assistance?';
-  const heroContent = pageContent?.content || 'Our friendly team is here to help. Reach out through any of our contact channels.';
+  const heroTitle = pageContent?.title || '';
+  const heroSubtitle = pageContent?.subtitle || '';
+  const heroContent = pageContent?.content || '';
 
   const contactMethods = [
     {
@@ -102,14 +104,14 @@ export default function ContactPage() {
       title: 'Call Us',
       value: contactPhone,
       link: `tel:${contactPhone.replace(/\s/g, '')}`,
-      description: 'Mon-Fri, 8am-6pm GMT'
+      description: getSetting('support_hours') || 'Mon-Fri, 8am-6pm'
     },
     {
       icon: 'ri-mail-line',
       title: 'Email Us',
       value: contactEmail,
       link: `mailto:${contactEmail}`,
-      description: 'We respond within 24 hours'
+      description: 'We respond quickly'
     },
     {
       icon: 'ri-whatsapp-line',
@@ -122,25 +124,16 @@ export default function ContactPage() {
       icon: 'ri-map-pin-line',
       title: 'Visit Us',
       value: contactAddress,
-      link: 'https://maps.google.com',
-      description: 'Mon-Sat, 9am-6pm'
+      link: '#location',
+      description: 'GPS: ' + (siteGps || '')
     }
   ];
 
-  const faqs = [
-    {
-      question: 'What are your delivery times?',
-      answer: 'Standard delivery takes 2-5 business days within Ghana. Express delivery is available for Accra and Kumasi. We ship medicines, supplements, and health products with care.'
-    },
-    {
-      question: 'Do you offer international shipping?',
-      answer: 'Currently, we ship within Ghana only. Many of our products are imported from China, so we handle all international logistics on our end. You simply order and receive.'
-    },
-    {
-      question: 'What payment methods do you accept?',
-      answer: 'We accept mobile money (MTN, Vodafone, AirtelTigo) and credit/debit cards through our secure Moolre payment gateway.'
-    }
-  ];
+  const cmsFaqs = getContentList('contact', 'faq_');
+  const faqs = cmsFaqs.length > 0 ? cmsFaqs.map((f: any) => ({
+    question: f.title || '',
+    answer: f.content || ''
+  })) : [];
 
   return (
     <div className="min-h-screen bg-white">
@@ -167,6 +160,40 @@ export default function ContactPage() {
               <p className="text-sm text-gray-500">{method.description}</p>
             </a>
           ))}
+        </div>
+
+        <div className="bg-gradient-to-br from-brand-700 to-brand-900 p-8 rounded-2xl text-white mb-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+              <i className="ri-map-pin-line text-2xl text-gold-400"></i>
+            </div>
+            <div>
+              <h3 className="font-bold text-lg mb-1">Our Location</h3>
+              <p className="text-white/70">{contactAddress}</p>
+              {siteGps && (
+                <p className="text-gold-300 font-bold text-sm mt-1 tracking-wider uppercase">GPS: {siteGps}</p>
+              )}
+            </div>
+          </div>
+
+          {siteBranches && siteBranches.length > 5 && (
+            <div className="flex items-start gap-4 pt-4 lg:pt-0 lg:border-l lg:border-white/10">
+              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <i className="ri-store-2-line text-2xl text-gold-400"></i>
+              </div>
+              <div>
+                <h3 className="font-bold text-lg mb-1">Our Branches</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
+                  {siteBranches.split(/[\n,]+/).map((b, i) => (
+                    <p key={i} className="text-white/70 text-sm flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 bg-gold-400/40 rounded-full"></span>
+                      {b.trim()}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
 
@@ -290,7 +317,7 @@ export default function ContactPage() {
             </p>
 
             <div className="space-y-4 mb-12">
-              {faqs.map((faq, index) => (
+              {faqs.map((faq: any, index: number) => (
                 <details key={index} className="bg-gray-50 rounded-xl overflow-hidden">
                   <summary className="px-6 py-4 font-medium text-gray-900 cursor-pointer hover:bg-gray-100 transition-colors">
                     {faq.question}
